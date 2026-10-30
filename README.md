@@ -1,13 +1,13 @@
-# php85-sbk
-PHP 8.5 spk for synology nas
-
 # PHP 8.5 for Synology DSM 7 (Web Station backend)
 
 Unofficial package of **PHP 8.5.12** for Synology NAS running **DSM 7.1 or newer**. After you install it,
 **PHP 8.5** appears in Web Station next to Synology's own PHP versions, and you can switch the
 extensions on and off per profile, the same way as with Synology's PHP.
 
-Current release: **8.5.12-6** · Author: [dev-valley](https://github.com/dev-valley/)
+Current release: **8.5.12-7** · Author: [dev-valley](https://github.com/dev-valley/)
+
+**Download:** [github.com/dev-valley/php85-sbk/releases/latest](https://github.com/dev-valley/php85-sbk/releases/latest)
+(all versions: [Releases](https://github.com/dev-valley/php85-sbk/releases))
 
 > Not affiliated with or supported by Synology. Use at your own risk, and keep a backup.
 
@@ -15,13 +15,14 @@ Current release: **8.5.12-6** · Author: [dev-valley](https://github.com/dev-val
 
 Check your model's CPU or platform name at
 [Synology: What kind of CPU does my NAS have?](https://kb.synology.com/en-global/DSM/tutorial/What_kind_of_CPU_does_my_NAS_have).
-Package Center refuses a package built for the wrong architecture.
+Package Center refuses a package built for the wrong architecture. Download the matching file from the
+[latest release](https://github.com/dev-valley/php85-sbk/releases/latest).
 
 | File | CPU | Platforms | Example models |
 |---|---|---|---|
-| `php85_x64-7.1_8.5.12-6.spk` | Intel / AMD 64-bit | apollolake, avoton, braswell, broadwell(nk/nkv2/ntbap), bromolow, cedarview, denverton, epyc7002/7003(ntb), geminilake(nk), grantley, icelaked, kvmx64, purley, r1000(nk), v1000(nk) | DS918+, DS920+, DS923+, DS1517+, DS1621+, DS1821+, DS224+, DS423+, RS-series, Virtual DSM |
-| `php85_aarch64-7.1_8.5.12-6.spk` | ARMv8 64-bit | rtd1296, rtd1619b, armada37xx | DS118, DS218, DS418, DS124, DS223, DS223j, DS423, DS120j, DS220j, DS420j |
-| `php85_armv7-7.1_8.5.12-6.spk` | ARMv7 32-bit | alpine, alpine4k, armada370, armada375, armada38x, armadaxp, monaco | DS216j, DS218j, DS418j, DS416, DS216play, DS215j |
+| `php85_x64-7.1_8.5.12-7.spk` | Intel / AMD 64-bit | apollolake, avoton, braswell, broadwell(nk/nkv2/ntbap), bromolow, cedarview, denverton, epyc7002/7003(ntb), geminilake(nk), grantley, icelaked, kvmx64, purley, r1000(nk), v1000(nk) | DS918+, DS920+, DS923+, DS1517+, DS1621+, DS1821+, DS224+, DS423+, RS-series, Virtual DSM |
+| `php85_aarch64-7.1_8.5.12-7.spk` | ARMv8 64-bit | rtd1296, rtd1619b, armada37xx | DS118, DS218, DS418, DS124, DS223, DS223j, DS423, DS120j, DS220j, DS420j |
+| `php85_armv7-7.1_8.5.12-7.spk` | ARMv7 32-bit | alpine, alpine4k, armada370, armada375, armada38x, armadaxp, monaco | DS216j, DS218j, DS418j, DS416, DS216play, DS215j |
 
 Model names are examples only. The platform name is what decides.
 
@@ -36,11 +37,11 @@ Model names are examples only. The platform name is what decides.
 **ARM packages:** built from the same recipe, but **not tested on real hardware**, so consider them
 beta. Feedback is welcome.
 
-SHA-256:
+SHA-256 (also attached to the release as `SHA256SUMS-8.5.12-7.txt`):
 ```
-088ba321200624bf901db85b028c0340c3165ee9da5d57b526a84d8a461e6846  php85_x64-7.1_8.5.12-6.spk
-d4f72025b234443b6ea02d66a5e751104873960e53e2556b005166ddd73834ea  php85_aarch64-7.1_8.5.12-6.spk
-1408a64590c4a21d085ed39707cb27d57d0b85e56198d617c9e0b82e4b151df3  php85_armv7-7.1_8.5.12-6.spk
+9c8b1dec27fe88e69346c2c7a720e2543d7c3d0f4917e0bddf435ae302991e15  php85_x64-7.1_8.5.12-7.spk
+638b624d3cbb9682641f4dfa614333f633be568dc67b84e812a8317a2936c5b0  php85_aarch64-7.1_8.5.12-7.spk
+0d5d588b80759e7d1ba070309397f30b129d11c92d3ef3f37d61c76b00a523ef  php85_armv7-7.1_8.5.12-7.spk
 ```
 
 ## Installation
@@ -49,11 +50,13 @@ d4f72025b234443b6ea02d66a5e751104873960e53e2556b005166ddd73834ea  php85_aarch64-
 2. Package Center → **Manual Install** → choose the spk for your CPU. The package isn't signed, so DSM
    shows a warning about the publisher. Confirm it to continue.
 3. Web Station → **Script Language Settings** → **Create** → choose **PHP 8.5**.
-4. Tick the extensions you need. For the two switches at the top of the profile:
-   - **"Enable PHP cache": leave it off** unless an app needs **APCu**. OPcache is always built in and
-     active since PHP 8.5, whatever this switch says. The switch loads APCu **and** tries to load OPcache
-     as a separate module, which doesn't exist in 8.5. With the switch on, APCu works, but every PHP-FPM
-     start writes a harmless `Failed loading Zend extension 'opcache.so'` warning to the log.
+4. Tick the extensions you need. If an app needs **APCu**, tick **apcu** in the extension list. For the
+   two switches at the top of the profile:
+   - **"Enable PHP cache": leave it off.** OPcache is always built in and active since PHP 8.5, whatever
+     this switch says. The switch loads APCu **and** tries to load OPcache as a separate module, which
+     doesn't exist in 8.5. With the switch on, every PHP-FPM start writes a harmless
+     `Failed loading Zend extension 'opcache.so'` warning to the log. Ticking apcu **and** turning on
+     the switch also logs `Module "apcu" is already loaded`.
    - **"Enable Xdebug": leave it off.** Xdebug isn't included. Turning it on does nothing except write a
      `Failed loading Zend extension 'xdebug.so'` warning to the log.
 
@@ -76,13 +79,10 @@ If PHP 8.5 doesn't appear in Web Station, re-register it via SSH:
 mbstring, mysqlnd, pcntl, pcre (with JIT), PDO, random, Reflection, session, SimpleXML, SPL, standard,
 tokenizer, uri, xml, xmlreader, xmlwriter, Zend OPcache
 
-**Shared extensions (switchable in Web Station's extension list, 37):** bcmath, bz2, calendar, curl, dba
-(with cdb/flatfile/inifile), exif, ftp, gd, gettext, gmp, iconv, **imagick 3.8.1**, intl, ldap,
+**Shared extensions (switchable in Web Station's extension list, 38):** apcu 5.1.28, bcmath, bz2, calendar,
+curl, dba (with cdb/flatfile/inifile), exif, ftp, gd, gettext, gmp, iconv, **imagick 3.8.1**, intl, ldap,
 mailparse 3.2.0, memcached 3.4.0, mysqli, openssl, pdo_dblib, pdo_mysql, pdo_pgsql, pdo_sqlite, pgsql,
 phar, posix, shmop, soap, sockets, sodium, sqlite3, ssh2 1.5.0, sysvmsg, sysvsem, sysvshm, xsl, zip, zlib
-
-**APCu 5.1.28** is included as well, but in 8.5.12-6 it isn't in the extension list. It's enabled through
-Web Station's **"Enable PHP cache"** switch (see Installation, step 4).
 
 Not included: readline (interactive shell only), xdebug (debugger, not meant for production servers), redis, igbinary.
 
@@ -121,9 +121,12 @@ Not included: readline (interactive shell only), xdebug (debugger, not meant for
 runs as fast as Synology's PHP 8.4.27, within measurement noise (about 2.4–2.6 s for both).
 
 ## Changelog
-- **8.5.12-7:** APCu is listed in Web Station's extension list (tick apcu instead of using the "Enable PHP cache" switch). No code changes.
+
+- **8.5.12-7:** APCu is listed in Web Station's extension list (tick apcu instead of using the
+  "Enable PHP cache" switch). No code changes.
 - **8.5.12-6:** imagick 3.8.1 with bundled ImageMagick 7 Q8 and websafe policy
-- **8.5.12-5:** built with `-O2` (earlier builds were unoptimized and about 3× slower). Added soap, dba, mailparse, pgsql, pdo_pgsql, ldap, memcached, ssh2 and pdo_dblib.
+- **8.5.12-5:** built with `-O2` (earlier builds were unoptimized and about 3× slower). Added soap, dba,
+  mailparse, pgsql, pdo_pgsql, ldap, memcached, ssh2 and pdo_dblib.
 - **8.5.12-4:** extensions as switchable shared modules, php85-cgi, APCu
 - **8.5.12-3:** first version usable as a Web Station backend
 
