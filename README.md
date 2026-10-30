@@ -132,5 +132,4 @@ runs as fast as Synology's PHP 8.4.27, within measurement noise (about 2.4–2.6
 
 PHP is distributed under the PHP License. The bundled extensions and libraries are under their own
 licenses (OpenSSL: Apache 2.0, ICU: Unicode, curl: curl license, ImageMagick: ImageMagick license,
-GMP/libheif/libde265/FreeTDS: LGPL, etc.). Build instructions and scripts:
-[php85-webstation-kit](https://github.com/dev-valley/).
+GMP/libheif/libde265/FreeTDS: LGPL, etc.).
