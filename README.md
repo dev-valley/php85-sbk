@@ -121,10 +121,9 @@ Not included: readline (interactive shell only), xdebug (debugger, not meant for
 runs as fast as Synology's PHP 8.4.27, within measurement noise (about 2.4–2.6 s for both).
 
 ## Changelog
-
+- **8.5.12-7:** APCu is listed in Web Station's extension list (tick apcu instead of using the "Enable PHP cache" switch). No code changes.
 - **8.5.12-6:** imagick 3.8.1 with bundled ImageMagick 7 Q8 and websafe policy
-- **8.5.12-5:** built with `-O2` (earlier builds were unoptimized and about 3× slower). Added soap, dba,
-  mailparse, pgsql, pdo_pgsql, ldap, memcached, ssh2 and pdo_dblib.
+- **8.5.12-5:** built with `-O2` (earlier builds were unoptimized and about 3× slower). Added soap, dba, mailparse, pgsql, pdo_pgsql, ldap, memcached, ssh2 and pdo_dblib.
 - **8.5.12-4:** extensions as switchable shared modules, php85-cgi, APCu
 - **8.5.12-3:** first version usable as a Web Station backend
 
